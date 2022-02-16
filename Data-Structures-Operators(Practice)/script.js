@@ -1,11 +1,51 @@
 'use strict';
 
 // Data needed for a later exercise
-// const flights =
-//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+  const output = `${type.replaceAll('_', ' ')} from ${from
+    .slice(0, 3)
+    .toUpperCase()} to ${to.slice(0, 3).toUpperCase()} (${time.replace(
+    ':',
+    'h'
+  )})`;
+  console.log(output);
+}
 
 // Data needed for first part of the section
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 const restaurant = {
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
@@ -26,29 +66,35 @@ const restaurant = {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 };
 
+// Property NAMES
+// const properties = Object.keys(openingHours);
+// console.log(properties);
+
+// let openstr = `We are open on ${properties.length} days: `;
+// for (const day of properties) {
+//   openstr += `${day},`;
+// }
+// console.log(openstr);
+
+// //Property VALUES
+
+// const values = Object.values(openingHours);
+// console.log(values);
+
+// //Entire object
+
+// const entries = Object.entries(openingHours);
+// for (const [key, { open, close }] of entries) {
+//   console.log(`On ${key} we open at ${open} and close at ${close}`);
+// }
 //The for of loop
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
-for (const item of menu) console.log(item);
-for (const [i, el] of menu.entries()) console.log(`${i + 1}:${el}`);
+// for (const item of menu) console.log(item);
+// for (const [i, el] of menu.entries()) console.log(`${i + 1}:${el}`);
 // restaurant.orderDelievery({
 //   time: '23:30',
 //   address: 'fjfflflf',
@@ -202,46 +248,46 @@ operator.
 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
 Then, call the function again with players from game.scored */
 
-// const game = {
-//   team1: 'Bayern Munich',
-//   team2: 'Borrussia Dortmund',
-//   players: [
-//     [
-//       'Neuer',
-//       'Pavard',
-//       'Martinez',
-//       'Alaba',
-//       'Davies',
-//       'Kimmich',
-//       'Goretzka',
-//       'Coman',
-//       'Muller',
-//       'Gnarby',
-//       'Lewandowski',
-//     ],
-//     [
-//       'Burki',
-//       'Schulz',
-//       'Hummels',
-//       'Akanji',
-//       'Hakimi',
-//       'Weigl',
-//       'Witsel',
-//       'Hazard',
-//       'Brandt',
-//       'Sancho',
-//       'Gotze',
-//     ],
-//   ],
-//   score: '4:0',
-//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-//   date: 'Nov 9th, 2037',
-//   odds: {
-//     team1: 1.33,
-//     x: 3.25,
-//     team2: 6.5,
-//   },
-// };
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
 
 // const [players1, players2] = game.players;
 // console.log(players1, players2);
@@ -263,3 +309,44 @@ Then, call the function again with players from game.scored */
 // const printGoals = function (...players) {
 //   console.log(`${players.length} goals were scored`);
 // };
+
+// Coding Challenge #2
+// Let's continue with our football betting app! Keep using the 'game' variable from
+// before.
+// Your tasks:
+// 1. Loop over the game.scored array and print each player name to the console,
+// along with the goal number (Example: "Goal 1: Lewandowski")
+// 2. Use a loop to calculate the average odd and log it to the console (We already
+// studied how to calculate averages, you can go check if you don't remember)
+// 3. Print the 3 odds to the console, but in a nice formatted way, exactly like this:
+// Odd of victory Bayern Munich: 1.33
+// Odd of draw: 3.25
+// Odd of victory Borrussia Dortmund: 6.5
+// Get the team names directly from the game object, don't hardcode them
+// (except for "draw"). Hint: Note how the odds and the game objects have the
+// same property names �
+// 4. Bonus: Create an object called 'scorers' which contains the names of the
+// players who scored as properties, and the number of goals as the value. In this
+// game, it will look like this:
+// {
+//  Gnarby: 1,
+//  Hummels: 1,
+//  Lewandowski: 2
+// }
+// GOOD LUCK
+
+// const goals = game.scored;
+// for (const [i, el] of goals.entries()) console.log(`Goal ${i + 1}:${el}`);
+
+// let average = 0;
+// for (const odd of Object.values(game.odds)) average += odd;
+// average /= Object.values(game.odds).length;
+// console.log(average);
+
+// for (const [team, odd] of Object.entries(game.odds)) {
+//   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+//   console.log(`Odd of ${teamStr} ${odd}`);
+// }
+
+// const str = 'ishir is great';
+// console.log(str.replaceAll('is', 'was'));
